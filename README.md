@@ -13,7 +13,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
   * password
   * admin
     * True: has permission to create, update and delete posts, and create and delete comments.
-    * False: has permission to create comment.
+    * False: has permission to create comments and delete self's comments.
 
 ### Post
 * Fields
@@ -45,3 +45,11 @@ Each heading bellow is a separate MongoDB collection inside the same database.
   * Creation Date
   * Author
     * Reference to the user who created it.
+* Endpoints
+  * `/posts/:postId/comments`
+    * **GET:** Fetches the list of all comments of a single post
+    * **POST:** Creates a new comment for a single post
+  * `/posts/:postId/comments/:commmentId`
+    * **GET:** Fetches a single comment.
+    * No **PUT** because no one can update comments.
+    * **DELETE:** Deletes a single comment.
