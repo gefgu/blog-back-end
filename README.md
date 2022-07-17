@@ -14,3 +14,15 @@ The back end of my blog.
     * True: has permission to create, update and delete posts, and create and delete comments.
     * False: has permission to create comment.
 
+### Post
+* Fields
+  * Title
+  * Content
+    * It will come in HTML5 because of TinyMCE6
+  * Creation Date
+  * Publish Date
+    * It will allow for scheduling posts.
+    * That is, only posts past "now" will be show publicly
+    * Different dates allows for different sortings in admin dashboard.
+  * Author
+    * Reference to the user who created it.
