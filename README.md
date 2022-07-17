@@ -4,7 +4,8 @@ The back end of my blog.
 
 # Plan
 
-## Models
+## MongoDB collections
+Each heading bellow is a separate MongoDB collection inside the same database.
 
 ### User
 * Fields
@@ -26,6 +27,14 @@ The back end of my blog.
     * Different dates allows for different sortings in admin dashboard.
   * Author
     * Reference to the user who created it.
+* Endpoints
+  * `/posts`
+    * **GET:** Fetches the list of all posts
+    * **POST:** Creates a new post
+  * `posts/:postId`
+    * **GET:** Fetches a single post
+    * **PUT:** Updates a single post
+    * **DELETE:** Deletes a single post
 
 ### Comment
 * Fields
