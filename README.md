@@ -26,3 +26,13 @@ The back end of my blog.
     * Different dates allows for different sortings in admin dashboard.
   * Author
     * Reference to the user who created it.
+
+### Comment
+* Fields
+  * Post
+    * Reference to the post that is being commented.
+  * Content
+    * It will come in HTML5 because of TinyMCE6
+  * Creation Date
+  * Author
+    * Reference to the user who created it.
