@@ -1,6 +1,4 @@
-# blog-back-end
-The back end of my blog.
-
+# My Blog Back-End
 
 # Plan
 
