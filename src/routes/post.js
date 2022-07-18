@@ -11,4 +11,13 @@ router.get("/", (req, res, next) => {
     });
 });
 
+router.get("/:postId", (req, res, next) => {
+  req.context.models.Post.findById(req.params.postId)
+    .populate("author")
+    .exec((err, postList) => {
+      if (err) return next(err);
+      res.json(postList);
+    });
+});
+
 module.exports = router;
