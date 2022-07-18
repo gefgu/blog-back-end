@@ -79,4 +79,19 @@ router.get("/:commentId", (req, res, next) => {
     });
 });
 
+router.delete("/:commentId", (req, res, next) => {
+  req.context.models.Comment.findById(req.params.commentId)
+    .populate("author")
+    .exec((err, comment) => {
+      if (err) return next(err);
+      req.context.models.Comment.findByIdAndRemove(
+        req.params.commentId,
+        (err) => {
+          if (err) return next(err);
+          res.json({ message: "COMMENT DELETED WITH SUCCESS!", comment });
+        }
+      );
+    });
+});
+
 module.exports = router;
