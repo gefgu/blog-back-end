@@ -36,10 +36,7 @@ router.post("/", [
       });
     });
   }),
-  body("post", "post must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+  body("post", "post must be specified").trim().isLength({ min: 1 }).escape(),
   check("post").custom((value, { req }) => {
     return new Promise((resolve, reject) => {
       req.context.models.Post.findById(value, (err, post) => {
@@ -72,5 +69,14 @@ router.post("/", [
     });
   },
 ]);
+
+router.get("/:commentId", (req, res, next) => {
+  req.context.models.Comment.findById(req.params.commentId)
+    .populate("author")
+    .exec((err, comment) => {
+      if (err) return next(err);
+      res.json(comment);
+    });
+});
 
 module.exports = router;
