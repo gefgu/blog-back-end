@@ -9,6 +9,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
 * Fields
   * **username**
   * **password**
+    * It will store as bcrypt hashing with salting.
   * **admin**
     * *True*: has permission to create, update and delete posts, and create and delete comments.
     * *False*: has permission to create comments and delete self's comments.
@@ -16,6 +17,10 @@ Each heading bellow is a separate MongoDB collection inside the same database.
   * JSON Web Tokens and PassportJS
     * Expiration date: 1 Day
     * It will be saved in Local Storage.
+* Endpoints
+  * `/users`
+    * **POST:** Creates a new user.
+      * It will receive the password as bcrypt hashing with salting. This way, the actual password will not be sended to the server. 
 
 ### Post
 * Fields
