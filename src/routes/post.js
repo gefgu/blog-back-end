@@ -63,9 +63,9 @@ router.post("/", [
 router.get("/:postId", (req, res, next) => {
   req.context.models.Post.findById(req.params.postId)
     .populate("author")
-    .exec((err, postList) => {
+    .exec((err, post) => {
       if (err) return next(err);
-      res.json(postList);
+      res.json(post);
     });
 });
 
@@ -122,5 +122,18 @@ router.put("/:postId", [
     );
   },
 ]);
+
+router.delete("/:postId", (req, res, next) => {
+  req.context.models.Post.findById(req.params.postId)
+    .populate("author")
+    .exec((err, post) => {
+      if (err) return next(err);
+
+      req.context.models.Post.findByIdAndRemove(req.params.postId, (err) => {
+        if (err) return next(err);
+        res.json({ message: "DELETE successful", post });
+      });
+    });
+});
 
 module.exports = router;
