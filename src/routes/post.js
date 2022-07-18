@@ -55,7 +55,7 @@ router.post("/", [
     post.save(function (err) {
       if (err) return next(err);
 
-      res.json({ message: "Post ADDED with success!" });
+      res.json({ message: "Post ADDED with success!", post });
     });
   },
 ]);
@@ -117,7 +117,7 @@ router.put("/:postId", [
       function (err) {
         if (err) return next(err);
 
-        res.json({ message: "Post UPDATED with success!" });
+        res.json({ message: "Post UPDATED with success!", post });
       }
     );
   },
