@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const models = require("./models");
 
 const app = express();
 
@@ -8,6 +9,11 @@ const mongoDb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}
 mongoose.connect(mongoDb, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+app.use((req, res, next) => {
+  req.context = { models };
+  next();
+});
 
 app.get("/", (req, res) => res.json({ message: "abc" }));
 
