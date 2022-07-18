@@ -21,5 +21,6 @@ app.use((req, res, next) => {
 
 app.use("/posts", routes.post);
 app.use("/posts/:postId/comments", routes.comment);
+app.use("/users", routes.user);
 
 app.listen(3000, () => console.log("listening on port 3000"));
