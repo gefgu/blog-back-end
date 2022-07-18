@@ -1,5 +1,7 @@
 const express = require("express");
-const { body, check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -38,5 +40,29 @@ router.post("/", [
     });
   },
 ]);
+
+router.post("/login", (req, res, next) => {
+  const {username, password } = req.body;
+  req.context.models.User.findOne(
+    { username: username },
+    (err, user) => {
+      if (err) return next(err);
+      if (user) {
+        bcrypt.compare(password, user.password, (err, response) => {
+          if (response) {
+            const opts = {};
+            opts.expiresIn = 120; // token expires in 2min
+            const token = jwt.sign({ username }, process.env.JWT_SECRET, opts);
+            return res.status(200).json({ message: "AUTHORIZED", token });
+          } else {
+            return res.status(401).json({ message: "WRONG PASSWORD" });
+          }
+        });
+      } else {
+        return res.status(401).json({ message: "NO USER FOUND" });
+      }
+    }
+  );
+});
 
 module.exports = router;
