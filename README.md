@@ -23,6 +23,9 @@ Each heading bellow is a separate MongoDB collection inside the same database.
   - `/users`
     - **POST:** Creates a new user.
       - It will receive the password as bcrypt hashing with salting. This way, the actual password will not be sended to the server.
+  - `/users/login`
+    - **POST:** Log in user.
+      - Returns JWT token.
 
 ### Post
 
