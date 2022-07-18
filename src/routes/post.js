@@ -55,7 +55,7 @@ router.post("/", [
     post.save(function (err) {
       if (err) return next(err);
 
-      res.json({ message: "Post ADDED with success!", post });
+      res.json({ message: "POST CREATED WITH SUCCESS!", post });
     });
   },
 ]);
@@ -117,7 +117,7 @@ router.put("/:postId", [
       function (err) {
         if (err) return next(err);
 
-        res.json({ message: "Post UPDATED with success!", post });
+        res.json({ message: "POST UPDATED WITH SUCCESS!", post });
       }
     );
   },
@@ -131,7 +131,7 @@ router.delete("/:postId", (req, res, next) => {
 
       req.context.models.Post.findByIdAndRemove(req.params.postId, (err) => {
         if (err) return next(err);
-        res.json({ message: "DELETE successful", post });
+        res.json({ message: "POST DELETED WITH SUCCESS!", post });
       });
     });
 });
