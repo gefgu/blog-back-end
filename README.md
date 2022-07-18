@@ -27,6 +27,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
     * It will allow for scheduling posts.
     * That is, only posts past "now" will be show publicly
     * Different dates allows for different sortings in admin dashboard.
+    * This is the only not required field. If it has no value, the post is not published
   * **Author**
     * Reference to the user who created it.
 * Endpoints
