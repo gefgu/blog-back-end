@@ -41,11 +41,11 @@ Each heading bellow is a separate MongoDB collection inside the same database.
 
 ### Comment
 * Fields
-  * **Post**
-    * Reference to the post that is being commented.
   * **Content**
     * It will come in HTML5 because of TinyMCE6
   * **Creation Date**
+  * **Post**
+    * Reference to the post that is being commented.
   * **Author**
     * Reference to the user who created it.
 * Endpoints
