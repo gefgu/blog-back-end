@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const models = require("./models");
+const routes = require("./routes");
 
 const app = express();
 
@@ -15,6 +16,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.json({ message: "abc" }));
+app.use("/posts", routes.post);
 
 app.listen(3000, () => console.log("listening on port 3000"));
