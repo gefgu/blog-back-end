@@ -1,5 +1,6 @@
 const express = require("express");
 const { body, check, validationResult } = require("express-validator");
+const passport = require("passport");
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", [
+router.post("/", passport.authenticate("jwt", { session: false }), [
   body("content", "content must be specified")
     .trim()
     .isLength({ min: 1 })
@@ -79,7 +80,7 @@ router.get("/:commentId", (req, res, next) => {
     });
 });
 
-router.delete("/:commentId", (req, res, next) => {
+router.delete("/:commentId", passport.authenticate("jwt", { session: false }), (req, res, next) => {
   req.context.models.Comment.findById(req.params.commentId)
     .populate("author")
     .exec((err, comment) => {

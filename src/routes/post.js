@@ -1,5 +1,6 @@
 const express = require("express");
 const { body, check, validationResult } = require("express-validator");
+const passport = require("passport");
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", [
+router.post("/", passport.authenticate("jwt", { session: false }), [
   body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
   body("content", "content must be specified")
     .trim()
@@ -69,7 +70,7 @@ router.get("/:postId", (req, res, next) => {
     });
 });
 
-router.put("/:postId", [
+router.put("/:postId", passport.authenticate("jwt", { session: false }), [
   body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
   body("content", "content must be specified")
     .trim()
@@ -123,7 +124,7 @@ router.put("/:postId", [
   },
 ]);
 
-router.delete("/:postId", (req, res, next) => {
+router.delete("/:postId", passport.authenticate("jwt", { session: false }), (req, res, next) => {
   req.context.models.Post.findById(req.params.postId)
     .populate("author")
     .exec((err, post) => {
