@@ -27,7 +27,7 @@ app.use("/posts/:postId/comments", routes.comment);
 app.use("/users", routes.user);
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ error: err.stack });
+  res.status(err.status || 500).json({ error: err.message });
 });
 
 app.listen(3000, () => console.log("listening on port 3000"));
