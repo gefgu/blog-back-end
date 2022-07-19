@@ -32,22 +32,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("creationDate", "creationDate must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("post", "post must be specified").trim().isLength({ min: 1 }).escape(),
-  check("post").custom((value, { req }) => {
-    return new Promise((resolve, reject) => {
-      req.context.models.Post.findById(value, (err, post) => {
-        if (post) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
-    });
-  }),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -57,9 +41,8 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
 
     const comment = new req.context.models.Comment({
       content: req.body.content,
-      creationDate: req.body.creationDate,
       author: req.user._id,
-      post: req.body.post,
+      post: req.post._id,
     });
 
     comment.save(function (err) {
