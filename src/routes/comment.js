@@ -2,7 +2,7 @@ const express = require("express");
 const { body, check, validationResult } = require("express-validator");
 const passport = require("passport");
 
-const router = express.Router({mergeParams: true});
+const router = express.Router({ mergeParams: true });
 
 router.use((req, res, next) => {
   req.context.models.Post.findById(req.params.postId).exec((err, post) => {
@@ -19,7 +19,7 @@ router.use((req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  req.context.models.Comment.find({})
+  req.context.models.Comment.find({ post: req.post._id })
     .populate("author")
     .exec((err, commentList) => {
       if (err) return next(err);
