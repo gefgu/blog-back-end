@@ -93,7 +93,9 @@ router.delete(
           comment.author._id.toString() !== req.user._id.toString() &&
           !req.user.admin
         ) {
-          return next();
+          const err = new Error("Unauthorized");
+          err.status = 401;
+          return next(err);
         }
         req.context.models.Comment.findByIdAndRemove(
           req.params.commentId,
