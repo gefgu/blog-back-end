@@ -58,6 +58,11 @@ router.get("/:commentId", (req, res, next) => {
     .populate("author")
     .exec((err, comment) => {
       if (err) return next(err);
+      if (comment === null) {
+        const err = new Error("Comment not found");
+        err.status = 404;
+        return next(err);
+      }
       res.json(comment);
     });
 });
@@ -71,6 +76,11 @@ router.delete(
       .populate("author")
       .exec((err, comment) => {
         if (err) return next(err);
+        if (comment === null) {
+          const err = new Error("Comment not found");
+          err.status = 404;
+          return next(err);
+        }
         if (
           comment.author._id.toString() !== req.user._id.toString() &&
           !req.user.admin
