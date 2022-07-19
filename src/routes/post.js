@@ -9,6 +9,11 @@ router.get("/", (req, res, next) => {
     .populate("author")
     .exec((err, postList) => {
       if (err) return next(err);
+      if (postList === null) {
+        const err = new Error("Post List not found");
+        err.status = 404;
+        return next(err);
+      }
       res.json(postList);
     });
 });
@@ -51,6 +56,11 @@ router.get("/:postId", (req, res, next) => {
     .populate("author")
     .exec((err, post) => {
       if (err) return next(err);
+      if (post === null) {
+        const err = new Error("Post not found");
+        err.status = 404;
+        return next(err);
+      }
       res.json(post);
     });
 });
@@ -88,6 +98,12 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
       function (err) {
         if (err) return next(err);
 
+        if (post === null) {
+          const err = new Error("Post not found");
+          err.status = 404;
+          return next(err);
+        }
+
         res.json({ message: "POST UPDATED WITH SUCCESS!", post });
       }
     );
@@ -102,6 +118,12 @@ router.delete(
       .populate("author")
       .exec((err, post) => {
         if (err) return next(err);
+
+        if (post === null) {
+          const err = new Error("Post not found");
+          err.status = 404;
+          return next(err);
+        }
 
         req.context.models.Post.findByIdAndRemove(req.params.postId, (err) => {
           if (err) return next(err);
