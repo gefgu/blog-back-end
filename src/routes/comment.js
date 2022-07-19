@@ -2,7 +2,21 @@ const express = require("express");
 const { body, check, validationResult } = require("express-validator");
 const passport = require("passport");
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
+
+router.use((req, res, next) => {
+  req.context.models.Post.findById(req.params.postId).exec((err, post) => {
+    if (err) return next(err);
+    if (post === null) {
+      const err = new Error("Post not found");
+      err.status = 404;
+      return next(err);
+    }
+    console.log(post);
+    req.post = post;
+    return next();
+  });
+});
 
 router.get("/", (req, res, next) => {
   req.context.models.Comment.find({})
