@@ -69,10 +69,17 @@ router.delete(
   "/:commentId",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    // Even if comment doesn't belong to postId, it will be deleted - Implementation detail
     req.context.models.Comment.findById(req.params.commentId)
       .populate("author")
       .exec((err, comment) => {
         if (err) return next(err);
+        if (
+          comment.author._id.toString() !== req.user._id.toString() &&
+          !req.user.admin
+        ) {
+          return next();
+        }
         req.context.models.Comment.findByIdAndRemove(
           req.params.commentId,
           (err) => {
