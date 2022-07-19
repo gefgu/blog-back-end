@@ -52,7 +52,7 @@ router.post("/login", (req, res, next) => {
           if (response) {
             const opts = {};
             opts.expiresIn = 120; // token expires in 2min
-            const token = jwt.sign({ username }, process.env.JWT_SECRET, opts);
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, opts);
             return res.status(200).json({ message: "AUTHORIZED", token });
           } else {
             return res.status(401).json({ message: "WRONG PASSWORD" });
