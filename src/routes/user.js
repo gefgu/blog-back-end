@@ -59,7 +59,9 @@ router.post("/login", (req, res, next) => {
           }
         });
       } else {
-        return res.status(401).json({ message: "NO USER FOUND" });
+        const err = new Error("User not found");
+        err.status = 404;
+        return next(err);
       }
     }
   );
