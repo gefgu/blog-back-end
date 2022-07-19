@@ -25,6 +25,12 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     .isLength({ min: 1 })
     .escape(),
   (req, res, next) => {
+    if (!req.user.admin) {
+      const err = new Error("Unauthorized");
+      err.status = 401;
+      return next(err);
+    }
+
     const errors = validationResult(req);
     if (errors.array().length > 0) {
       res.json(errors);
@@ -67,6 +73,11 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
     .isLength({ min: 1 })
     .escape(),
   (req, res, next) => {
+    if (!req.user.admin) {
+      const err = new Error("Unauthorized");
+      err.status = 401;
+      return next(err);
+    }
     const errors = validationResult(req);
     if (errors.array().length > 0) {
       res.json(errors);
@@ -104,6 +115,11 @@ router.delete(
   "/:postId",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    if (!req.user.admin) {
+      const err = new Error("Unauthorized");
+      err.status = 401;
+      return next(err);
+    }
     req.context.models.Post.findById(req.params.postId)
       .populate("author")
       .exec((err, post) => {
