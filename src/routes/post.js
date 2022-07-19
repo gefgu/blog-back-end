@@ -1,5 +1,5 @@
 const express = require("express");
-const { body, check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const passport = require("passport");
 
 const router = express.Router();
@@ -23,21 +23,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("author", "author must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  check("author").custom((value, { req }) => {
-    return new Promise((resolve, reject) => {
-      req.context.models.User.findById(value, (err, user) => {
-        if (user) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
-    });
-  }),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -50,7 +35,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
       content: req.body.content,
       creationDate: req.body.creationDate,
       publishDate: req.body.publishDate || null,
-      author: req.body.author,
+      author: req.user._id,
     });
 
     post.save(function (err) {
@@ -80,21 +65,6 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("author", "author must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  check("author").custom((value, { req }) => {
-    return new Promise((resolve, reject) => {
-      req.context.models.User.findById(value, (err, user) => {
-        if (user) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
-    });
-  }),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -108,7 +78,7 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
       content: req.body.content,
       creationDate: req.body.creationDate,
       publishDate: req.body.publishDate || null,
-      author: req.body.author,
+      author: req.user._id,
     });
 
     req.context.models.Post.findByIdAndUpdate(
@@ -124,17 +94,21 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
   },
 ]);
 
-router.delete("/:postId", passport.authenticate("jwt", { session: false }), (req, res, next) => {
-  req.context.models.Post.findById(req.params.postId)
-    .populate("author")
-    .exec((err, post) => {
-      if (err) return next(err);
-
-      req.context.models.Post.findByIdAndRemove(req.params.postId, (err) => {
+router.delete(
+  "/:postId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    req.context.models.Post.findById(req.params.postId)
+      .populate("author")
+      .exec((err, post) => {
         if (err) return next(err);
-        res.json({ message: "POST DELETED WITH SUCCESS!", post });
+
+        req.context.models.Post.findByIdAndRemove(req.params.postId, (err) => {
+          if (err) return next(err);
+          res.json({ message: "POST DELETED WITH SUCCESS!", post });
+        });
       });
-    });
-});
+  }
+);
 
 module.exports = router;

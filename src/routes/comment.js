@@ -22,21 +22,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("author", "author must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  check("author").custom((value, { req }) => {
-    return new Promise((resolve, reject) => {
-      req.context.models.User.findById(value, (err, user) => {
-        if (user) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
-    });
-  }),
   body("post", "post must be specified").trim().isLength({ min: 1 }).escape(),
   check("post").custom((value, { req }) => {
     return new Promise((resolve, reject) => {
@@ -59,7 +44,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     const comment = new req.context.models.Comment({
       content: req.body.content,
       creationDate: req.body.creationDate,
-      author: req.body.author,
+      author: req.user._id,
       post: req.body.post,
     });
 
@@ -80,19 +65,23 @@ router.get("/:commentId", (req, res, next) => {
     });
 });
 
-router.delete("/:commentId", passport.authenticate("jwt", { session: false }), (req, res, next) => {
-  req.context.models.Comment.findById(req.params.commentId)
-    .populate("author")
-    .exec((err, comment) => {
-      if (err) return next(err);
-      req.context.models.Comment.findByIdAndRemove(
-        req.params.commentId,
-        (err) => {
-          if (err) return next(err);
-          res.json({ message: "COMMENT DELETED WITH SUCCESS!", comment });
-        }
-      );
-    });
-});
+router.delete(
+  "/:commentId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    req.context.models.Comment.findById(req.params.commentId)
+      .populate("author")
+      .exec((err, comment) => {
+        if (err) return next(err);
+        req.context.models.Comment.findByIdAndRemove(
+          req.params.commentId,
+          (err) => {
+            if (err) return next(err);
+            res.json({ message: "COMMENT DELETED WITH SUCCESS!", comment });
+          }
+        );
+      });
+  }
+);
 
 module.exports = router;
