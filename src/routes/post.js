@@ -24,10 +24,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("creationDate", "creationDate must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -38,7 +34,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     const post = new req.context.models.Post({
       title: req.body.title,
       content: req.body.content,
-      creationDate: req.body.creationDate,
       publishDate: req.body.publishDate || null,
       author: req.user._id,
     });
@@ -71,10 +66,6 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("creationDate", "creationDate must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -86,7 +77,6 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
       _id: req.params.postId,
       title: req.body.title,
       content: req.body.content,
-      creationDate: req.body.creationDate,
       publishDate: req.body.publishDate || null,
       author: req.user._id,
     });
