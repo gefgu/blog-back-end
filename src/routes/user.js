@@ -51,7 +51,7 @@ router.post("/login", (req, res, next) => {
         bcrypt.compare(password, user.password, (err, response) => {
           if (response) {
             const opts = {};
-            opts.expiresIn = 60 * 20; // token expires in 20min
+            opts.expiresIn = 60 * 60 * 24; // token expires in 1 day.
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, opts);
             return res.status(200).json({ message: "AUTHORIZED", token });
           } else {
