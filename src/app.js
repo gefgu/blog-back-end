@@ -5,6 +5,8 @@ const models = require("./models");
 const routes = require("./routes");
 const passport = require("passport");
 const jwtStrategy = require("./strategies/jwt");
+const compression = require("compression");
+const { default: helmet } = require("helmet");
 
 const app = express();
 passport.use(jwtStrategy);
@@ -16,6 +18,8 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(compression());
+app.use(helmet());
 
 app.use((req, res, next) => {
   req.context = { models };
