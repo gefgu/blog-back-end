@@ -19,11 +19,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", passport.authenticate("jwt", { session: false }), [
-  body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
-  body("content", "content must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+  body("title", "Title must be specified").trim().isLength({ min: 1 }),
+  body("content", "content must be specified").trim().isLength({ min: 1 }),
   (req, res, next) => {
     if (!req.user.admin) {
       const err = new Error("Unauthorized");
@@ -67,11 +64,8 @@ router.get("/:postId", (req, res, next) => {
 });
 
 router.put("/:postId", passport.authenticate("jwt", { session: false }), [
-  body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
-  body("content", "content must be specified")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+  body("title", "Title must be specified").trim().isLength({ min: 1 }),
+  body("content", "content must be specified").trim().isLength({ min: 1 }),
   (req, res, next) => {
     if (!req.user.admin) {
       const err = new Error("Unauthorized");

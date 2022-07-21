@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 router.post("/", [
-  body("username", "username must be specified").trim().isLength().escape(),
+  body("username", "username must be specified").trim().isLength(),
   body("username", "username already in use").custom((value, { req }) => {
     return new Promise((resolve, reject) => {
       req.context.models.User.findOne({ username: value }, (err, user) => {

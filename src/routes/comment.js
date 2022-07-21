@@ -29,8 +29,7 @@ router.get("/", (req, res, next) => {
 router.post("/", passport.authenticate("jwt", { session: false }), [
   body("content", "content must be specified")
     .trim()
-    .isLength({ min: 1 })
-    .escape(),
+    .isLength({ min: 1 }),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
