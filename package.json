@@ -1,6 +1,9 @@
 {
   "name": "blog-back-end",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.13.2"
+  },
   "description": "# Plan",
   "main": "./src/app.js",
   "scripts": {
