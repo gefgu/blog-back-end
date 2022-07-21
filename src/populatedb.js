@@ -116,23 +116,15 @@ function populatePosts(callback) {
         createPost(
           // Taken from https://www.tiny.cloud/docs/tinymce/6/
           "Post #1",
-          `<div class="paragraph">
-    <p>The output created is in HTML5 and can include lists, tables, and other useful elements, depending on your configuration. The functionality of the editor can be extended through plugins and customizations, or limited to suit your use-case. TinyMCE can also be customized to look and feel like part of your application or webpage by customizing the user interface. TinyMCE can be integrated into a range of frameworks and Content Management Systems (CMSs), and can be either:</p>
-    </div>
-    <div class="ulist">
-    <ul>
-    <li>
-    <p>Loaded from the Tiny Cloud CDN (Content Delivery Network), which will ensure TinyMCE is always using the latest version.</p>
-    </li>
-    <li>
-    <p>Installed with a package manager (self-hosted).</p>
-    </li>
-    <li>
-    <p>Extracted from a .zip file (self-hosted).</p>
-    </li>
-    </ul>
-    </div>
-    <p><span style="text-decoration: underline;"><strong>&nbsp;</strong></span></p>`,
+          `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellentesque vehicula leo, id posuere massa dignissim et. Maecenas tempus enim et consectetur pellentesque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur malesuada mi lacus, at gravida est semper eu. In faucibus dictum efficitur. Aliquam erat volutpat. In varius leo eget nisi finibus ultricies. Ut ex est, lobortis in augue sit amet, dictum euismod diam. Donec sit amet nisl nulla. Suspendisse eleifend aliquam libero sed placerat. Quisque malesuada, nisl eu mollis convallis, velit justo malesuada neque, quis molestie lorem nisi feugiat dui. Aliquam ullamcorper sollicitudin rutrum. Nulla auctor metus elit, ac rhoncus purus cursus vitae. Mauris accumsan pharetra diam euismod feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          
+          Quisque sodales neque neque, consequat porta sem egestas eu. Maecenas varius vitae orci auctor pulvinar. Morbi dictum fringilla nibh vitae porta. Etiam ut felis placerat, porta nibh ac, semper erat. Suspendisse vestibulum nibh a massa dictum lacinia. Vestibulum vehicula tincidunt urna, sit amet aliquam erat. Vestibulum hendrerit, ex vel gravida vestibulum, ex tellus lacinia justo, at pulvinar mi nunc consectetur magna. Aenean malesuada metus quis metus maximus tempor. Sed vestibulum est at sapien facilisis pharetra. Nulla feugiat neque eget vestibulum suscipit. Suspendisse sed porttitor metus, ac iaculis purus. Donec sed laoreet mauris. Vestibulum justo lectus, rhoncus eget dictum eu, lacinia quis nisl.
+          
+          Aliquam hendrerit justo lorem, venenatis lobortis tortor convallis nec. Nunc ullamcorper porta ipsum, in cursus tortor posuere a. Quisque fermentum justo nec elit vestibulum, at auctor risus ultrices. Etiam hendrerit ex non bibendum mattis. Proin dictum ut nulla a auctor. Mauris aliquet, quam eu vulputate ultricies, nulla lectus volutpat lectus, eget consectetur libero velit sed nibh. Curabitur nec eleifend sem, ac imperdiet diam. Nulla vestibulum neque sed ullamcorper cursus. Nullam nec hendrerit libero, non eleifend dolor. Nulla et aliquam tortor.
+          
+          Nam non est eget ligula tincidunt pretium. Nullam ornare purus sed nulla auctor porta. Cras a feugiat mauris. Aenean aliquam, mi in dapibus tristique, felis arcu aliquet lacus, at accumsan ligula purus et dui. Donec venenatis ornare sapien, sollicitudin luctus eros consectetur sit amet. Nunc ultrices nibh in nibh porttitor lobortis. Vivamus lacinia sem vitae lorem volutpat, et ornare tortor interdum. Vivamus mi odio, fermentum at massa et, imperdiet congue ipsum. Vivamus at placerat arcu. Aliquam imperdiet quam nulla, vitae dictum ligula scelerisque nec. Suspendisse vitae pulvinar est. Phasellus sollicitudin gravida auctor. Etiam semper velit id interdum vulputate. Vivamus eget nunc lorem.
+          
+          Cras non aliquam ante. Suspendisse faucibus eu ante in fermentum. Cras dapibus libero eget nunc bibendum, eget mattis lectus aliquam. Cras rhoncus imperdiet elit eu interdum. Pellentesque elementum felis ut condimentum fermentum. Donec non vulputate metus. Donec quis auctor metus. Cras volutpat tincidunt ante vitae dictum. Etiam scelerisque auctor urna sit amet congue. Sed quis ullamcorper ipsum. Duis rhoncus iaculis quam non mollis. Nulla sit amet elementum ligula.`,
           Date.now(),
           Date.now(),
           users[1],
@@ -142,11 +134,15 @@ function populatePosts(callback) {
         createPost(
           // Taken from https://www.theodinproject.com/lessons/nodejs-blog-api
           "Post #2",
-          `<div id="introduction" class="scrollspy">
-        <h3><a class="internal-link" href="https://www.theodinproject.com/lessons/nodejs-blog-api#introduction">Introduction</a></h3>
-        <p>Do you know what you need? You need a Blog. Or maybe you don&rsquo;t, or maybe you already have one, in any case, this project will be a great way to practice and see the benefits of creating an API only backend. We&rsquo;re actually going to create the backend and <em>two</em> different front-ends for accessing and editing your blog posts. One of the front-end sites will be for people that want to read and comment on your posts while the other one will be just for you to write, edit and publish your posts.</p>
-        <p>Why are we setting it up like this? Because we can! If you already have a portfolio site and you want to add your blog posts to that site feel free to do that instead of creating a new site just for that. The important exercise here is setting up the API and then accessing it from the outside. There are some security benefits to setting up separate websites for blog consumption and blog editing, but really we&rsquo;re just doing it like this to demonstrate the power and flexibility of separating your backend code from your frontend code.</p>
-        </div>`,
+          `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellentesque vehicula leo, id posuere massa dignissim et. Maecenas tempus enim et consectetur pellentesque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur malesuada mi lacus, at gravida est semper eu. In faucibus dictum efficitur. Aliquam erat volutpat. In varius leo eget nisi finibus ultricies. Ut ex est, lobortis in augue sit amet, dictum euismod diam. Donec sit amet nisl nulla. Suspendisse eleifend aliquam libero sed placerat. Quisque malesuada, nisl eu mollis convallis, velit justo malesuada neque, quis molestie lorem nisi feugiat dui. Aliquam ullamcorper sollicitudin rutrum. Nulla auctor metus elit, ac rhoncus purus cursus vitae. Mauris accumsan pharetra diam euismod feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          
+          Quisque sodales neque neque, consequat porta sem egestas eu. Maecenas varius vitae orci auctor pulvinar. Morbi dictum fringilla nibh vitae porta. Etiam ut felis placerat, porta nibh ac, semper erat. Suspendisse vestibulum nibh a massa dictum lacinia. Vestibulum vehicula tincidunt urna, sit amet aliquam erat. Vestibulum hendrerit, ex vel gravida vestibulum, ex tellus lacinia justo, at pulvinar mi nunc consectetur magna. Aenean malesuada metus quis metus maximus tempor. Sed vestibulum est at sapien facilisis pharetra. Nulla feugiat neque eget vestibulum suscipit. Suspendisse sed porttitor metus, ac iaculis purus. Donec sed laoreet mauris. Vestibulum justo lectus, rhoncus eget dictum eu, lacinia quis nisl.
+          
+          Aliquam hendrerit justo lorem, venenatis lobortis tortor convallis nec. Nunc ullamcorper porta ipsum, in cursus tortor posuere a. Quisque fermentum justo nec elit vestibulum, at auctor risus ultrices. Etiam hendrerit ex non bibendum mattis. Proin dictum ut nulla a auctor. Mauris aliquet, quam eu vulputate ultricies, nulla lectus volutpat lectus, eget consectetur libero velit sed nibh. Curabitur nec eleifend sem, ac imperdiet diam. Nulla vestibulum neque sed ullamcorper cursus. Nullam nec hendrerit libero, non eleifend dolor. Nulla et aliquam tortor.
+          
+          Nam non est eget ligula tincidunt pretium. Nullam ornare purus sed nulla auctor porta. Cras a feugiat mauris. Aenean aliquam, mi in dapibus tristique, felis arcu aliquet lacus, at accumsan ligula purus et dui. Donec venenatis ornare sapien, sollicitudin luctus eros consectetur sit amet. Nunc ultrices nibh in nibh porttitor lobortis. Vivamus lacinia sem vitae lorem volutpat, et ornare tortor interdum. Vivamus mi odio, fermentum at massa et, imperdiet congue ipsum. Vivamus at placerat arcu. Aliquam imperdiet quam nulla, vitae dictum ligula scelerisque nec. Suspendisse vitae pulvinar est. Phasellus sollicitudin gravida auctor. Etiam semper velit id interdum vulputate. Vivamus eget nunc lorem.
+          
+          Cras non aliquam ante. Suspendisse faucibus eu ante in fermentum. Cras dapibus libero eget nunc bibendum, eget mattis lectus aliquam. Cras rhoncus imperdiet elit eu interdum. Pellentesque elementum felis ut condimentum fermentum. Donec non vulputate metus. Donec quis auctor metus. Cras volutpat tincidunt ante vitae dictum. Etiam scelerisque auctor urna sit amet congue. Sed quis ullamcorper ipsum. Duis rhoncus iaculis quam non mollis. Nulla sit amet elementum ligula. `,
           Date.now(),
           null,
           users[1],

@@ -32,7 +32,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
 - Fields
   - **Title**
   - **Content**
-    - It will come in HTML5 because of TinyMCE6
+    - It will be simple text.
   - **Creation Date**
   - **Publish Date**
     - It will allow for scheduling posts.
@@ -54,7 +54,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
 
 - Fields
   - **Content**
-    - It will come in HTML5 because of TinyMCE6
+    - It will be simple text.
   - **Creation Date**
   - **Post**
     - Reference to the post that is being commented.
