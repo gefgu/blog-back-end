@@ -41,4 +41,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message });
 });
 
-app.listen(8000, () => console.log("listening on port 8000"));
+app.listen(process.env.PORT || 80, () => console.log("Server Started"));
