@@ -28,7 +28,6 @@ router.post("/", [
     });
   }),
   body("password", "password must be bcrypt hashed value").trim().isLength(60), // Length of Bcrypt hashed password
-  body("admin", "admin must be specified").isBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (errors.array().length > 0) {
@@ -39,7 +38,7 @@ router.post("/", [
     const user = new req.context.models.User({
       username: req.body.username,
       password: req.body.password,
-      admin: req.body.admin,
+      admin: req.body.admin || false,
     });
 
     user.save(function (err) {
