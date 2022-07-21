@@ -21,6 +21,7 @@ Each heading bellow is a separate MongoDB collection inside the same database.
     - It will be saved in Local Storage.
 - Endpoints
   - `/users`
+    - **GET:** Returns user data given JWT token.
     - **POST:** Creates a new user.
       - It will receive the password as bcrypt hashing with salting. This way, the actual password will not be sended to the server.
   - `/users/login`

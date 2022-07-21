@@ -2,8 +2,17 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const router = express.Router();
+
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    return res.json(req.user);
+  }
+);
 
 router.post("/", [
   body("username", "username must be specified").trim().isLength(),
@@ -42,29 +51,30 @@ router.post("/", [
 ]);
 
 router.post("/login", (req, res, next) => {
-  const {username, password } = req.body;
-  req.context.models.User.findOne(
-    { username: username },
-    (err, user) => {
-      if (err) return next(err);
-      if (user) {
-        bcrypt.compare(password, user.password, (err, response) => {
-          if (response) {
-            const opts = {};
-            opts.expiresIn = 60 * 60 * 24; // token expires in 1 day.
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, opts);
-            return res.status(200).json({ message: "AUTHORIZED", token });
-          } else {
-            return res.status(401).json({ message: "WRONG PASSWORD" });
-          }
-        });
-      } else {
-        const err = new Error("User not found");
-        err.status = 404;
-        return next(err);
-      }
+  const { username, password } = req.body;
+  req.context.models.User.findOne({ username: username }, (err, user) => {
+    if (err) return next(err);
+    if (user) {
+      bcrypt.compare(password, user.password, (err, response) => {
+        if (response) {
+          const opts = {};
+          opts.expiresIn = 60 * 60 * 24; // token expires in 1 day.
+          const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            opts
+          );
+          return res.status(200).json({ message: "AUTHORIZED", token });
+        } else {
+          return res.status(401).json({ message: "WRONG PASSWORD" });
+        }
+      });
+    } else {
+      const err = new Error("User not found");
+      err.status = 404;
+      return next(err);
     }
-  );
+  });
 });
 
 module.exports = router;
