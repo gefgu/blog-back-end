@@ -7,6 +7,7 @@ const passport = require("passport");
 const jwtStrategy = require("./strategies/jwt");
 const compression = require("compression");
 const { default: helmet } = require("helmet");
+const cors = require("cors");
 
 const app = express();
 passport.use(jwtStrategy);
@@ -18,6 +19,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(compression());
 app.use(helmet());
 
@@ -34,4 +36,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message });
 });
 
-app.listen(3000, () => console.log("listening on port 3000"));
+app.listen(8000, () => console.log("listening on port 8000"));
