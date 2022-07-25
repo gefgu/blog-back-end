@@ -37,7 +37,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), [
     const post = new req.context.models.Post({
       title: req.body.title,
       content: req.body.content,
-      publishDate: req.body.publishDate || null,
+      publishedDate: req.body.publishedDate || null,
       author: req.user._id,
     });
 
@@ -82,7 +82,7 @@ router.put("/:postId", passport.authenticate("jwt", { session: false }), [
       _id: req.params.postId,
       title: req.body.title,
       content: req.body.content,
-      publishDate: req.body.publishDate || null,
+      publishedDate: req.body.publishedDate || null,
       author: req.user._id,
     });
 
