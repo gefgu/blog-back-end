@@ -18,6 +18,20 @@ router.get("/", (req, res, next) => {
     });
 });
 
+router.get("/published", (req, res, next) => {
+  req.context.models.Post.find({ publishedDate: { $lt: new Date() } })
+    .populate("author")
+    .exec((err, postList) => {
+      if (err) return next(err);
+      if (postList === null) {
+        const err = new Error("Post List not found");
+        err.status = 404;
+        return next(err);
+      }
+      res.json(postList);
+    });
+});
+
 router.post("/", passport.authenticate("jwt", { session: false }), [
   body("title", "Title must be specified").trim().isLength({ min: 1 }),
   body("content", "content must be specified").trim().isLength({ min: 1 }),

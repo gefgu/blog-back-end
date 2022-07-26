@@ -50,6 +50,8 @@ Each heading bellow is a separate MongoDB collection inside the same database.
     - **GET:** Fetches a single post
     - **PUT:** Updates a single post
     - **DELETE:** Deletes a single post
+  - `/posts/published`
+    - **GET:** Fetches the list of all posts published until "today"
 
 ### Comment
 
