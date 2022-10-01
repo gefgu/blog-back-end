@@ -71,3 +71,10 @@ Each heading bellow is a separate MongoDB collection inside the same database.
     - **GET:** Fetches a single comment.
     - No **PUT** because no one can update comments.
     - **DELETE:** Deletes a single comment.
+    
+
+## Related Repositories
+
+* [Author's view](https://github.com/gefgu/blog-author-view)  
+* [Reader's view](https://github.com/gefgu/blog-reader-view)  
+* [Back-End](https://github.com/gefgu/blog-back-end)
